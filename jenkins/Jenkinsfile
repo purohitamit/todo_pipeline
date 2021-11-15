@@ -1,0 +1,74 @@
+pipeline {
+    agent any
+    stages {
+        stage('Setup') {
+            steps {
+                sh "mkdir newdir"
+                sh "newdir"
+                //
+            }
+        }
+        stage('Test') {
+            steps {
+                //
+            }
+        }
+        stage('Create Schema') {
+            steps {
+                //
+            }
+        }
+        stage('Run') {
+            steps {
+                //
+            }
+        }
+    }
+}
+#!/bin/bash
+
+#export DATABASE_URI
+echo "Setting Database URI\n"
+export DATABASE_URI
+echo $DATABASE_URI
+
+
+# install apt dependies
+echo "Installing app dependencies\n"
+sudo apt update
+sudo apt install python3-venv python3-pip python3 -y
+echo
+
+# create virtual environment
+echo "Creating python Venv\n"
+python3 -m venv venv
+echo
+
+#activate virtual environment
+echo "Activating python Venv\n"
+source venv/bin/activate
+echo
+
+# install pip requirements
+echo "Installing requirements\n"
+pip3 install -r requirements.txt
+echo
+
+# test the app
+echo "Running pytest\n"
+python3 -m pytest \
+	--cov=application \
+    --cov-report term-missing \
+    --cov-report xml:coverage.xml \
+    --junitxml=junit_report.xml
+echo
+
+
+# run create.py to run schema
+echo "Creating table schema\n"
+python3 create.py
+echo
+
+# run the app
+#echo "Running the application"
+#python3 app.py
