@@ -3,8 +3,10 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh "mkdir newdir"
-                sh "newdir"
+                sh """
+                    mkdir newdir
+                    sh newdir
+                """
                 //
             }
         }
