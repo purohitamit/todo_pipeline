@@ -4,8 +4,8 @@ pipeline {
         stage('Setup') {
             steps {
                 sh """
-                    mkdir newdir
-                    sh newdir
+                    mkdir newdir2
+                    cd newdir2
                 """
                 //
             }
