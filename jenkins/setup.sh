@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mkdir newdir
-cd newdir
+mkdir newdir3
+cd newdir3
 touch newfile
